@@ -1,47 +1,47 @@
 # Number Guessing Game - Viet Hoang Cao 
 
-import random
-
-secret_number = random.randint(1,20)
-
-def number_guessing_game():
-    tries = 0 
-    ans = 0
-    question = "What is the number of books that I bought yesterday ? "
-
-    print("Welcome to my number guessing game!")
-    ready = input("Are you ready ? ").strip().title()
-    if ready == 'Yes':
-        print(f"Then let's get the ball rolling")
-        print(f"You are going to have a total of four gueeses")
-        print(question)
-
-        while tries < 4 and ans != secret_number:
-            ans = int(input("The total number of books that I bought yesterday is:").strip())
-            if ans < 1 or ans > 20: # check range first before check higher and lower
-                print(f"The number you entered is out of range. Please, try again !")
-                tries = tries + 1 
-            elif ans < secret_number:
-                print(f"The answer is greater than your guess. Please, try again !")
-                tries = tries + 1 
-            elif ans > secret_number:
-                print(f"The answer is lower than your guess. Please, try again !")
-                tries = tries + 1 
-
-        if ans == secret_number:
-            print(f"Congratulations, you have done a great job")
-        else:    
-            print(f"No more guesses, the answer is {secret_number}")
-
-    elif ready == 'No':
-        print(f"Then see you next time")
-    else:
-        print(f"Invalid text! Please only enter yes or no")    
+import random 
 
 while True:
-    number_guessing_game()
-    replay = input("Do you want to start over ?").title().strip()
-    if replay == "No":
-        break
-    elif replay == "Yes":
-        continue
+  secret_number = random.randint(1,20)
+  tries = 0
+  guess = 0
+
+  question = input("Welcome to my number guessing game. Are you ready ?").title().strip()
+  if question == "Yes":
+    print("Let's get the ball rolling !")
+    rule = "You are going to have a total of four tries. Note that your guess must not less than 1 or greater than 20. An incorrect guess will lose you a try" 
+    print(rule)
+    while secret_number != guess and tries < 4 : 
+      guess = int(input("Enter your guess:").strip())
+      if guess < 0 or guess > 20:
+        print("Your guess is out of range")
+        tries += 1                                      
+        print(f"tries = {tries}")
+      elif guess < secret_number:
+        print("The secret number is greater than your guess")
+        tries += 1
+        print(f"tries = {tries}")
+      elif guess > secret_number:
+        print("The secret number is less than your guess")
+        tries += 1
+        print(f"tries = {tries}")
+        
+    if guess == secret_number:
+      print("This is the correct guess. Well done!")
+    elif guess != secret_number:
+      print(f"Sorry you have no tries left. The secret number is {secret_number}")
+  
+  elif question == "No":
+    print("Okay. Have a great day")
+    break
+  else:
+    print("Invalid input. Try again") 
+    continue
+    
+  replay = input("Do you want to replay ? Yes or No ? ").title().strip()
+  if replay == "Yes":
+    continue
+  elif replay == "No":
+    print("Thank you very much for playing my game. See you next time !")  
+    break 
